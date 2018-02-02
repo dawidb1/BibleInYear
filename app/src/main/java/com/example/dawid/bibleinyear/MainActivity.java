@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         for (int i=0; i<bible.books.size(); i++){
 
             if (previousChapters >= numberOfChapters){
-                return currentBook+ " rozdział: " + currentChapter;
+                return currentBook+ " rozdział " + currentChapter;
             }
             else {
                 currentChapter = numberOfChapters - previousChapters;
