@@ -26,14 +26,35 @@ public class MainActivity extends AppCompatActivity {
 
         int numberOfChapters = howManyChapters(currentDayOfYear,currentDayOfWeek,startYearDayOfWeek);
 
-        tvDayOfYear.setText(currentDayOfYear+"");
-        tvNumberOfChapters.setText(numberOfChapters+"");
+        tvDayOfYear.setText("Mija właśnie " +currentDayOfYear+" dzień twojego postanowienia");
+        tvNumberOfChapters.setText(currentStatus(numberOfChapters));
     }
 
     @BindView(R.id.dayOfYear)
     TextView tvDayOfYear;
     @BindView(R.id.numberOfChapters)
     TextView tvNumberOfChapters;
+
+    private String currentStatus(int numberOfChapters){
+        Bible bible = new Bible();
+        int previousChapters = 0;
+        String currentBook = "";
+        int currentChapter = 0;
+
+        for (int i=0; i<bible.books.size(); i++){
+
+            if (previousChapters >= numberOfChapters){
+                return currentBook+ " rozdział: " + currentChapter;
+            }
+            else {
+                currentChapter = numberOfChapters - previousChapters;
+                currentBook = bible.books.get(i).getName();
+
+                previousChapters += bible.books.get(i).getNumberOfChapter();
+            }
+        }
+        return "błąd";
+    }
 
     private int howManyChapters(int currentDayOfYear,int currentDayOfWeek, int startYearDayOfWeek){
         int CHAPTERS_USUAL = 3;
