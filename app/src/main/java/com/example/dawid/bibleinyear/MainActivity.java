@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         calendar.set(Calendar.DAY_OF_YEAR,1);
         int startYearDayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-        int numberOfChapters = howManyChapters(currentDayOfYear,currentDayOfWeek,startYearDayOfWeek);
-
+        //int numberOfChapters = howManyChapters(currentDayOfYear,currentDayOfWeek,startYearDayOfWeek);
+        int numberOfChapters = whichChapter(currentDayOfYear,startYearDayOfWeek);
         tvDayOfYear.setText("Mija właśnie " +currentDayOfYear+" dzień twojego postanowienia");
         tvNumberOfChapters.setText(currentStatus(numberOfChapters));
     }
@@ -70,11 +70,31 @@ public class MainActivity extends AppCompatActivity {
     private int howManySundays(int currentDayOfYear,int currentDayOfWeek, int startYearDayOfWeek){
         int numberOfSundays;
 
-        if (startYearDayOfWeek == Calendar.SUNDAY || currentDayOfWeek == Calendar.SUNDAY){
-            numberOfSundays = currentDayOfYear/7 + 1;
+        numberOfSundays = currentDayOfYear/7;
+        if (startYearDayOfWeek == Calendar.SUNDAY){
+            numberOfSundays += 1;
         }
-        else numberOfSundays= currentDayOfYear/7;
+        if (currentDayOfWeek == Calendar.SUNDAY){
+            numberOfSundays += 1;
+        }
+
         return  numberOfSundays;
+    }
+
+    private int whichChapter(int currentDayOfYear, int startYearDayOfWeek){
+        int firstWeek =  Calendar.SUNDAY - (startYearDayOfWeek - 1);
+        int numberOfChapterFirstWeek = 0;
+        if (firstWeek != 0){
+            numberOfChapterFirstWeek = firstWeek * 3 + 2;
+        }
+        int daysLeft = currentDayOfYear - firstWeek;
+
+        int numberOfChaptersFullWeek = (daysLeft/7)*(7*3+2);
+
+        int numberOfChaptersLeft = (daysLeft%7)*3;
+
+        int result = numberOfChapterFirstWeek+numberOfChaptersFullWeek+numberOfChaptersLeft;
+        return result;
     }
 
 }
