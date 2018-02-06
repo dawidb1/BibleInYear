@@ -44,5 +44,13 @@
         android:layout_marginTop="34dp"
         android:text="134"
         android:textSize="50dp" />
+    <Button
+        android:id="@+id/button_today_status_activity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Twój status"
+        android:layout_below="@+id/numberOfChapters"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"/>
 
 </RelativeLayout>

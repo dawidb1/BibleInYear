@@ -1,13 +1,16 @@
 package com.example.dawid.bibleinyear;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
     TextView tvDayOfYear;
     @BindView(R.id.numberOfChapters)
     TextView tvNumberOfChapters;
+    @BindView(R.id.button_today_status_activity)
+    Button btnGoTo2Activity;
+
+    @OnClick(R.id.button_today_status_activity) void goTo(){
+        Intent intent = new Intent(MainActivity.this,todayStatusActivity.class);
+        startActivity(intent);
+    }
 
     private String currentStatus(int numberOfChapters){
         Bible bible = new Bible();
